@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}LinkedList{% endblock %}</title>
+
+    {% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% endblock %}
+
+    <link href="" rel="stylesheet">
+
+    {% block styles %}
+    {% for item in base_css %}
+    <link href="{{ item }}" rel="stylesheet">
+    {% endfor %}
+    {% endblock %}
+  </head>
+  <body>
+    
+    {% block content %}{% endblock %}
+
+    {% block scripts %}
+    {% for item in base_js %}
+    <script src="{{ item }}"></script>
+    {% endfor %}
+    {% endblock %}
+  </body>
+</html>

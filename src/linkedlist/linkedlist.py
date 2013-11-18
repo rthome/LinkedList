@@ -16,6 +16,10 @@ def init_base_args():
 def index():
 	return render_template("index.html", base=g.base_template_args)
 
+@app.route("/login")
+def login():
+	return render_template("login.html", base=g.base_template_args)
+
 def run():
 	if not os.path.isfile(config.DATABASE):
 		models.create_tables()

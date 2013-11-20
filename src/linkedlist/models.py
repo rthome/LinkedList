@@ -14,6 +14,13 @@ class User(ModelBase):
 	fullname = peewee.CharField()
 	join_date = peewee.DateTimeField()
 
+class Entry(ModelBase):
+    user = peewee.ForeignKeyField(User)
+    url = peewee.CharField()
+    title = peewee.CharField()
+    unread = peewee.BooleanField()
+    add_date = peewee.DateTimeField()
+
 def connect_db():
 	_db.connect()
 
@@ -21,6 +28,7 @@ def close_db():
 	_db.close()
 
 def create_tables():
-	connect_db()
-	User.create_table()
-	close_db()
+    connect_db()
+    User.create_table()
+    Entry.create_table()
+    close_db()

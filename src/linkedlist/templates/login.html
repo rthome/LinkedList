@@ -15,14 +15,14 @@
         <h3 class="panel-title">Log in</h3>
     </div>
     <div class="panel-body">
-        <form role="form" action="{{ url_for('login') }}" method="post">
+        <form role="form" accept-charset="utf-8" action="{{ url_for('login') }}" method="post">
             <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email" />
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" />
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter password" />
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" />
             </div>
             <button type="submit" class="btn btn-default">Log in</button>
         </form>

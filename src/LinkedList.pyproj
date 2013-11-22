@@ -13,6 +13,8 @@
     <OutputPath>.</OutputPath>
     <Name>LinkedList</Name>
     <RootNamespace>LinkedList</RootNamespace>
+    <InterpreterId>{b9f00596-f803-4eff-a379-2ffc2aeb15c8}</InterpreterId>
+    <InterpreterVersion>3.3</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,6 +55,18 @@
     <Compile Include="linkedlist\passwords.py" />
     <Compile Include="linkedlist\__init__.py" />
     <Compile Include="linkedlist\__main__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="..\..\python-venv\flask-dev\">
+      <Id>{b9f00596-f803-4eff-a379-2ffc2aeb15c8}</Id>
+      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
+      <Version>3.3</Version>
+      <Description>flask-dev (Python 64-bit 3.3)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <LibraryPath>Lib\</LibraryPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

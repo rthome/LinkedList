@@ -11,7 +11,6 @@ class ModelBase(peewee.Model):
 class User(ModelBase):
 	email = peewee.CharField()
 	password = peewee.CharField()
-	fullname = peewee.CharField()
 	join_date = peewee.DateTimeField()
 
 class Entry(ModelBase):

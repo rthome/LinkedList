@@ -5,9 +5,8 @@
 
 ## Requirements
 
-* *Flask*
-* *flask-peewee*
-* *flask-bcrypt*
+* **Flask**
+* **flask-peewee**
 * Jinja2
 * MarkupSafe
 * WTForms

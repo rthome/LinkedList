@@ -4,7 +4,7 @@ def _get_salt():
     return str(uuid.uuid4()).replace("-", "")
 
 def _hash_password(password, salt):
-    return hashlib.sha512(bytes(salt) + bytes(password)).hexdigest()
+    return hashlib.sha512(bytes(salt, "utf-8") + bytes(password, "utf-8")).hexdigest()
 
 def _unpack_passwd(passwd_str):
     salt, hash = str.split(passwd_str, sep="$", maxsplit=1)

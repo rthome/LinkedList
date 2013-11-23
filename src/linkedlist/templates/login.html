@@ -1,31 +1,69 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <!-- Register -->
+{% if not session.auth %}
 <div class="panel panel-default">
     <div class="panel-body">
         Don't have an account?
         <a href="{{ url_for('register') }}">Register!</a>
     </div>
 </div>
+{% endif %}
 
 <!-- Log in -->
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Log in</h3>
+        <h3 class="panel-title">
+            {% if session.auth %}
+            You are logged in!
+            {% else %}
+            Log in
+            {% endif %}
+        </h3>
     </div>
     <div class="panel-body">
+        {% if not session.auth %}
         <form role="form" accept-charset="utf-8" action="{{ url_for('login') }}" method="post">
             <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" />
+                <label class="col-sm-2 control-label" for="email">Email address</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" />
+                </div>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" />
+                <label class="col-sm-2 control-label" for="password">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" />
+                </div>
             </div>
             <button type="submit" class="btn btn-default">Log in</button>
         </form>
+        {% else %}
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Email address</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">{{ session.user.email }}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">******</p>
+                </div>
+            </div>
+        </form>
+        {% endif %}
     </div>
+    {% if session.auth %}
+    <div class="panel-footer">
+        <a class="btn btn-link" type="submit" href="{{ url_for('index') }}">
+            <span class="glyphicon glyphicon-chevron-left" />
+            Return to main page
+        </a>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

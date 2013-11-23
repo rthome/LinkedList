@@ -16,15 +16,17 @@ def db_after_request(response):
     models.close_db()
     return response
 
-# inject base css and js arguments into all templates
 @app.context_processor
 def inject_base_args():
-    base = dict(js=["https://code.jquery.com/jquery.js", url_for("static", filename="js/bootstrap.min.js")], css=[url_for("static", filename="css/bootstrap.min.css")])
-    return dict(base=base)
+    d = {}
+    # inject base css and js arguments into all templates
+    d["base"] = dict(js=["https://code.jquery.com/jquery.js", url_for("static", filename="js/bootstrap.min.js")], css=[url_for("static", filename="css/bootstrap.min.css")])
+    return d
 
 app.add_url_rule("/", view_func=views.IndexView.as_view("index"))
 app.add_url_rule("/register", view_func=views.RegistrationView.as_view("register"))
 app.add_url_rule("/login", view_func=views.LoginView.as_view("login"))
+app.add_url_rule("/logout", view_func=views.LogoutView.as_view("logout"))
 app.add_url_rule("/add", view_func=views.AddView.as_view("add"))
 
 def run():

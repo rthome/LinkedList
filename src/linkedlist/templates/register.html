@@ -2,14 +2,12 @@
 
 {% block content %}
 <!-- Flashed messages -->
+{% for message in get_flashed_messages() %}
 <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <ul>
-        {% for message in get_flashed_messages() %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
+    <p>{{ message }}</p>
 </div>
+{% endfor %}
 
 <!-- Log in -->
 <div class="panel panel-default">

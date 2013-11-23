@@ -4,18 +4,30 @@ from flask import *
 from flask.views import MethodView
 
 import models, passwords
+from builtins import isinstance
+
+def auth_user(user):
+    session["auth"] = True
+    session["user"] = dict(email=user.email)
+
+def unauth_user():
+    del session["user"]
+    del session["auth"]
+
+def check_auth():
+    return session.get("auth", False)
 
 def login_required(f):
     @functools.wraps(f)
     def decorator(*args, **kwargs):
-        if not g.get("logged_in"):
-            abort(401)
-        return f(*args, **kwargs)
+        if check_auth():
+            return f(*args, **kwargs)
+        abort(401)
     return decorator
 
 class IndexView(MethodView):
     def get(self):
-        if g.get("logged_in"):
+        if check_auth():
             return render_template("index.html")
         else:
             return redirect(url_for("login"))
@@ -50,9 +62,19 @@ class LoginView(MethodView):
         pw = request.form["password"]
         try:
             user = models.User.get(models.User.email == email)
-            return redirect(url_for("index"))
+            if passwords.check_password(pw, user.password):
+                auth_user(user)
+                return redirect(url_for("index"))
         except models.User.DoesNotExist:
-            return redirect(url_for("login"))
+            pass
+        flash("Wrong username/password")
+        return redirect(url_for("login"))
+
+class LogoutView(MethodView):
+    def get(self):
+        if check_auth():
+            unauth_user()
+        return redirect(url_for("index"))
 
 class AddView(MethodView):
     decorators = [login_required]

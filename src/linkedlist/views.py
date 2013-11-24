@@ -7,7 +7,7 @@ import models, passwords
 
 def auth_user(user):
     session["auth"] = True
-    session["user"] = dict(email=user.email)
+    session["user"] = dict(email=user.email, join_date=user.join_date)
 
 def unauth_user():
     del session["user"]

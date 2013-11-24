@@ -5,13 +5,16 @@ import config
 _db = peewee.SqliteDatabase(config.DATABASE)
 
 class ModelBase(peewee.Model):
-	class Meta:
-		database = _db
+    class Meta:
+        database = _db
 
 class User(ModelBase):
-	email = peewee.CharField()
-	password = peewee.CharField()
-	join_date = peewee.DateTimeField()
+    email = peewee.CharField()
+    password = peewee.CharField()
+    join_date = peewee.DateTimeField()
+
+    def entries(self):
+        return Entry.select().where(Entry.user == self)
 
 class Entry(ModelBase):
     user = peewee.ForeignKeyField(User)
@@ -21,10 +24,10 @@ class Entry(ModelBase):
     add_date = peewee.DateTimeField()
 
 def connect_db():
-	_db.connect()
+    _db.connect()
 
 def close_db():
-	_db.close()
+    _db.close()
 
 def create_tables():
     connect_db()

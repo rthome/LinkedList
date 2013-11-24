@@ -4,7 +4,6 @@ from flask import *
 from flask.views import MethodView
 
 import models, passwords
-from builtins import isinstance
 
 def auth_user(user):
     session["auth"] = True

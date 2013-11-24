@@ -3,7 +3,7 @@ import datetime, functools
 from flask import *
 from flask.views import MethodView
 
-import models, passwords
+import models, passwords, config
 
 def auth_user(user):
     session["auth"] = True
@@ -12,16 +12,36 @@ def auth_user(user):
 def unauth_user():
     del session["user"]
     del session["auth"]
+    del session["admin"]
 
 def check_auth():
     return session.get("auth", False)
+
+def auth_admin():
+    session["admin"] = True
+
+def check_admin():
+    return session.get("admin", False)
+
+def check_admin_credentials(password):
+    return passwords.check_password(password, config.admin_pw_hash)
 
 def login_required(f):
     @functools.wraps(f)
     def decorator(*args, **kwargs):
         if check_auth():
             return f(*args, **kwargs)
-        abort(401)
+        else:
+            abort(401)
+    return decorator
+
+def admin_required(f):
+    @functools.wraps(f)
+    def decorator(*args, **kwargs):
+        if check_admin():
+            return f(*args, **kwargs)
+        else:
+            abort(401)
     return decorator
 
 class IndexView(MethodView):
@@ -80,3 +100,24 @@ class AddView(MethodView):
 
     def post(self):
         pass
+
+class AdminLoginView(MethodView):
+    def get(self):
+        if check_admin():
+            return redirect(url_for("admin_panel"))
+        else:
+            return render_template("admin_login.html")
+
+    def post(self):
+        pw = request.form["password"]
+        result = check_admin_credentials(pw)
+        print(result)
+        if result:
+            auth_admin()
+        return redirect(url_for("admin_login"))
+
+class AdminPanelView(MethodView):
+    decorators = [login_required, admin_required]
+
+    def get(self):
+        return render_template("admin_panel.html", users=models.User.select())

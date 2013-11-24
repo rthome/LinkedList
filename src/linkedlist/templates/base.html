@@ -17,7 +17,7 @@
 <body>
     <nav class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">LinkedList</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">LinkedList</a>
         </div>
 
         {% block navbar_content %}
@@ -40,6 +40,10 @@
                 <ul class="dropdown-menu">
                     <li><a href="#">Profile</a></li>
                     <li><a href="#">Preferences</a></li>
+                    {% if not session.admin %}
+                    <li class="divider"></li>
+                    <li><a href="{{ url_for('admin_login') }}">Admin login</a></li>
+                    {% endif %}
                     <li class="divider"></li>
                     <li><a href="{{ url_for('logout') }}">Log out</a></li>
                 </ul>

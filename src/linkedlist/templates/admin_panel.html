@@ -10,6 +10,8 @@
             <th>#</th>
             <th>User Email</th>
             <th>Join Date</th>
+            <th>Last Login</th>
+            <th>Login #</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +20,8 @@
             <td>{{ user.id }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.join_date }}</td>
+            <td>{{ user.last_login_date }}</td>
+            <td>{{ user.login_count }}</td>
         </tr>
         {% endfor %}
     </tbody>

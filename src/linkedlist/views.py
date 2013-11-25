@@ -6,6 +6,11 @@ from flask.views import MethodView
 import models, passwords, config
 
 def auth_user(user):
+    # update user
+    user.last_login_date = datetime.datetime.now()
+    user.login_count += 1
+    user.save()
+    # set session variables
     session["auth"] = True
     session["user"] = dict(email=user.email, join_date=user.join_date)
 

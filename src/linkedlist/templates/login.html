@@ -2,27 +2,26 @@
 
 {% block content %}
 
-<!-- Register -->
 {% if not session.auth %}
-<div class="panel panel-default">
-    <div class="panel-body">
-        Don't have an account?
-        <a href="{{ url_for('register') }}">Register!</a>
-    </div>
+<div class="page-header">
+    <h1>
+        Log in <br />
+        <small>
+            Don't have an account?
+            <a href="{{ url_for('register') }}">Register!</a>
+        </small>
+    </h1>
 </div>
 {% endif %}
 
-<!-- Log in -->
 <div class="panel panel-default">
+    {% if session.auth %}
     <div class="panel-heading">
         <h3 class="panel-title">
-            {% if session.auth %}
             You are logged in!
-            {% else %}
-            Log in
-            {% endif %}
         </h3>
     </div>
+    {% endif %}
     <div class="panel-body">
         {% if not session.auth %}
         <form role="form" accept-charset="utf-8" action="{{ url_for('login') }}" method="post">

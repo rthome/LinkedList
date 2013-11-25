@@ -2,19 +2,16 @@
 
 {% block content %}
 
-<!-- Log in -->
-<div class="panel panel-default">
-    <div class="panel-body">
-        Already have an account?
-        <a href="{{ url_for('login') }}">Log in!</a>
-    </div>
+<div class="page-header">
+    <h1>
+        Create a new account <br />
+        <small>
+            Already have an account?
+            <a href="{{ url_for('login') }}">Log in!</a>
+        </small>
+    </h1>
 </div>
-
-<!-- Log in -->
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">Create a new account</h3>
-    </div>
     <div class="panel-body">
         <form role="form" accept-charset="utf-8" action="{{ url_for('register') }}" method="post">
             <div class="form-group">

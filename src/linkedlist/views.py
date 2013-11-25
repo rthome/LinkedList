@@ -82,7 +82,7 @@ class RegistrationView(MethodView):
             if error:
                 return render_template("register.html")
             else:
-                models.User.create(email=email, password=passwords.create_hashed_password(pw), join_date=datetime.datetime.now())
+                models.User.create(email=email, password=passwords.create_hashed_password(pw))
                 flash("Your account was created successfully!", "success")
                 return redirect(url_for("index"))
 

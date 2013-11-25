@@ -12,7 +12,8 @@ def auth_user(user):
 def unauth_user():
     del session["user"]
     del session["auth"]
-    del session["admin"]
+    if "admin" in session:
+        del session["admin"]
 
 def check_auth():
     return session.get("auth", False)
@@ -53,41 +54,52 @@ class IndexView(MethodView):
 
 class RegistrationView(MethodView):
     def get(self):
-        return render_template("register.html")
+        if check_auth():
+            flash("You are already logged in!", "info")
+            return redirect(url_for("login"))
+        else:
+            return render_template("register.html")
 
     def post(self):
-        email = request.form["email"]
-        pw, pwr = request.form["password"], request.form["password_repeat"]
-        error = False
-        if email.strip() == "":
-            flash("Please enter your email address to register!")
-            error = True
-        if pw != pwr:
-            flash("The password you entered didn't match!")
-            error = True
-        if error:
-            return render_template("register.html")
+        if check_auth():
+            flash("You are already logged in!", "info")
+            return redirect(url_for("login"))
         else:
-            models.User.create(email=email, password=passwords.create_hashed_password(pw), join_date=datetime.datetime.now())
-            flash("Your account was created successfully!")
-            return redirect(url_for("index"))
+            email = request.form["email"]
+            pw = request.form["password"]
+            error = False
+            if email.strip() == "":
+                flash("Please enter your email address to register!", "warning")
+                error = True
+            if len(pw) < 5:
+                flash("Please enter a password that is at least 5 characters", "warning")
+                error = True
+            if error:
+                return render_template("register.html")
+            else:
+                models.User.create(email=email, password=passwords.create_hashed_password(pw), join_date=datetime.datetime.now())
+                flash("Your account was created successfully!", "success")
+                return redirect(url_for("index"))
 
 class LoginView(MethodView):
     def get(self):
         return render_template("login.html")
 
     def post(self):
-        email = request.form["email"]
-        pw = request.form["password"]
-        try:
-            user = models.User.get(models.User.email == email)
-            if passwords.check_password(pw, user.password):
-                auth_user(user)
-                return redirect(url_for("index"))
-        except models.User.DoesNotExist:
-            pass
-        flash("Wrong username/password")
-        return redirect(url_for("login"))
+        if check_auth():
+            return redirect(url_for("login"))
+        else:
+            email = request.form["email"]
+            pw = request.form["password"]
+            try:
+                user = models.User.get(models.User.email == email)
+                if passwords.check_password(pw, user.password):
+                    auth_user(user)
+                    return redirect(url_for("index"))
+            except models.User.DoesNotExist:
+                pass
+            flash("Wrong username or password", "danger")
+            return redirect(url_for("login"))
 
 class LogoutView(MethodView):
     def get(self):

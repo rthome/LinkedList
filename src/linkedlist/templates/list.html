@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block navbar_content %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Your saved links</h3>
+    </div>
+    <div class="panel-body">
+        <div class="list-group">
+            {% for item in entries %}
+            <a class="list-group-item" target="_blank" rel="nofollow" href="{{ item.url }}">
+                <span class="text-primary">{{ item.title|default(item.url, true) }}</span>
+                {% if item.unread %}
+                <span class="badge">unread</span>
+                {% endif %}
+                {% if item.url|urlloc %}
+                <small class="text-muted">({{ item.url|urlloc }})</small>
+                {% endif %}
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="panel-footer center-block">
+        <ul class="list-inline">
+            <li class="text-muted">Links: {{ entries|list|length }}</li>
+            <li class="text-muted">Unread: {{ entries|selectattr("unread")|list|length }}</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

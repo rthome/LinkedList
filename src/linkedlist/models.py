@@ -23,9 +23,9 @@ class User(ModelBase):
 class Entry(ModelBase):
     user = peewee.ForeignKeyField(User)
     url = peewee.CharField()
-    title = peewee.CharField()
-    unread = peewee.BooleanField()
-    add_date = peewee.DateTimeField()
+    title = peewee.CharField(default="")
+    unread = peewee.BooleanField(default=True)
+    add_date = peewee.DateTimeField(default=datetime.datetime.now)
 
 def connect_db():
     _db.connect()

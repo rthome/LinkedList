@@ -12,7 +12,7 @@ def auth_user(user):
     user.save()
     # set session variables
     session["auth"] = True
-    session["user"] = dict(email=user.email, join_date=user.join_date)
+    session["user"] = dict(id=user.id, email=user.email, join_date=user.join_date)
 
 def unauth_user():
     del session["user"]
@@ -53,7 +53,7 @@ def admin_required(f):
 class IndexView(MethodView):
     def get(self):
         if check_auth():
-            return render_template("index.html")
+            return redirect(url_for("list"))
         else:
             return redirect(url_for("login"))
 
@@ -112,11 +112,19 @@ class LogoutView(MethodView):
             unauth_user()
         return redirect(url_for("index"))
 
+class ListView(MethodView):
+    decorators = [login_required]
+
+    def get(self):
+        return render_template("list.html", entries=models.User.get(models.User.id == session["user"]["id"]).entries())
+
 class AddView(MethodView):
     decorators = [login_required]
 
     def post(self):
-        pass
+        url = request.form["url"]
+        models.Entry.create(url=url, user=models.User.get(models.User.id == session["user"]["id"]))
+        return redirect(url_for("list"))
 
 class AdminLoginView(MethodView):
     def get(self):

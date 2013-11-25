@@ -22,11 +22,11 @@
 
         {% block navbar_content %}
         {% if session.auth%}
-        <form class="navbar-form navbar-left" role="search">
+        <form class="navbar-form navbar-left" action="{{ url_for('add_entry') }}" method="post">
             <div class="input-group">
-                <input type="url" placeholder="Add link" class="form-control">
+                <input type="url" placeholder="Add link" name="url" class="form-control">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Go!</button>
+                    <button class="btn btn-default" type="submit">Add</button>
                 </span>
             </div>
         </form>

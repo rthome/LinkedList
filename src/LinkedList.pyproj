@@ -46,7 +46,7 @@
     <Content Include="linkedlist\templates\admin_login.html" />
     <Content Include="linkedlist\templates\admin_panel.html" />
     <Content Include="linkedlist\templates\base.html" />
-    <Content Include="linkedlist\templates\index.html" />
+    <Content Include="linkedlist\templates\list.html" />
     <Content Include="linkedlist\templates\login.html" />
     <Content Include="linkedlist\templates\register.html" />
   </ItemGroup>

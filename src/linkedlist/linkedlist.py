@@ -31,7 +31,7 @@ app.add_url_rule("/logout", view_func=views.LogoutView.as_view("logout"))
 app.add_url_rule("/add", view_func=views.AddView.as_view("add"))
 
 # admin pages
-app.add_url_rule("/admin_login", view_func=views.AdminLoginView.as_view("admin_login"))
+app.add_url_rule("/admin/login", view_func=views.AdminLoginView.as_view("admin_login"))
 app.add_url_rule("/admin", view_func=views.AdminPanelView.as_view("admin_panel"))
 
 def run():

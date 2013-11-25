@@ -145,4 +145,4 @@ class AdminPanelView(MethodView):
     decorators = [login_required, admin_required]
 
     def get(self):
-        return render_template("admin_panel.html", users=models.User.select())
+        return render_template("admin_panel.html", users=models.User.select(), entries=models.Entry.select())

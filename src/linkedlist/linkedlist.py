@@ -1,4 +1,4 @@
-import os.path, re, urllib.parse
+import os.path, urllib.parse
 from flask import *
 
 import models, views, config
@@ -8,8 +8,8 @@ app.config.from_object(config)
 
 @app.template_filter()
 def urlloc(s):
-	o = urllib.parse.urlparse(s)
-	return o.netloc
+    o = urllib.parse.urlparse(s)
+    return o.netloc
 
 # open db connection on every request, close on every response
 @app.before_request
@@ -43,6 +43,6 @@ app.add_url_rule("/admin/login", view_func=views.AdminLoginView.as_view("admin_l
 app.add_url_rule("/admin", view_func=views.AdminPanelView.as_view("admin_panel"))
 
 def run():
-	if not os.path.isfile(config.DATABASE):
-		models.create_tables()
-	app.run()
+    if not os.path.isfile(config.DATABASE):
+        models.create_tables()
+    app.run()

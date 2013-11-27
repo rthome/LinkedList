@@ -12,7 +12,7 @@ class ModelBase(peewee.Model):
 
 class User(ModelBase):
     email = peewee.CharField()
-    password = peewee.CharField()
+    pwhash = peewee.CharField()
     join_date = peewee.DateTimeField(default=datetime.datetime.now)
     last_login_date = peewee.DateTimeField(null=True)
     login_count = peewee.IntegerField(default=0)

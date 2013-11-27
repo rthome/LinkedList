@@ -2,8 +2,9 @@ import datetime, functools
 
 from flask import *
 from flask.views import MethodView
+from werkzeug.security import check_password_hash, generate_password_hash
 
-import models, passwords, config
+import models, config
 
 def auth_user(user):
     # update user
@@ -30,7 +31,7 @@ def check_admin():
     return session.get("admin", False)
 
 def check_admin_credentials(password):
-    return passwords.check_password(password, config.admin_pw_hash)
+    return check_password_hash(config.admin_pw_hash, password)
 
 def login_required(f):
     @functools.wraps(f)
@@ -82,7 +83,7 @@ class RegistrationView(MethodView):
             if error:
                 return render_template("register.html")
             else:
-                models.User.create(email=email, password=passwords.create_hashed_password(pw))
+                models.User.create(email=email, pwhash=generate_password_hash(pw, method="pbkdf2:sha512:1000", salt_length=8))
                 flash("Your account was created successfully!", "success")
                 return redirect(url_for("index"))
 
@@ -98,7 +99,7 @@ class LoginView(MethodView):
             pw = request.form["password"]
             try:
                 user = models.User.get(models.User.email == email)
-                if passwords.check_password(pw, user.password):
+                if check_password_hash(user.pwhash, pw):
                     auth_user(user)
                     return redirect(url_for("index"))
             except models.User.DoesNotExist:

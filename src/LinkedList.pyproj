@@ -54,7 +54,6 @@
     <Compile Include="linkedlist\config.py" />
     <Compile Include="linkedlist\linkedlist.py" />
     <Compile Include="linkedlist\models.py" />
-    <Compile Include="linkedlist\passwords.py" />
     <Compile Include="linkedlist\views.py" />
     <Compile Include="linkedlist\__init__.py" />
     <Compile Include="linkedlist\__main__.py" />

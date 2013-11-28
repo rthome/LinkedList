@@ -25,7 +25,7 @@ def db_after_request(response):
 def inject_base_args():
     d = {}
     # inject base css and js arguments into all templates
-    d["base"] = dict(js=["https://code.jquery.com/jquery.js", url_for("static", filename="js/bootstrap.min.js")], css=[url_for("static", filename="css/bootstrap.min.css")])
+    d["base"] = dict(js=["https://code.jquery.com/jquery.js", url_for("static", filename="js/bootstrap.min.js")], css=[url_for("static", filename="css/bootstrap.min.css"), url_for("static", filename="style.css")])
     return d
 
 # user pages

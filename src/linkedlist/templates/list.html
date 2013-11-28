@@ -10,7 +10,7 @@
 
     <div class="list-group">
         {% for item in entries %}
-        <a class="list-group-item" target="_blank" rel="nofollow" href="{{ item.url }}">
+        <a class="list-group-item" target="_blank" rel="nofollow" href="{{ url_for('openlink', entry_id=item.id) }}">
             <span class="text-primary">{{ item.title|default(item.url, true) }}</span>
             {% if item.unread %}
             <span class="badge">unread</span>

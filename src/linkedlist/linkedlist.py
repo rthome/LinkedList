@@ -32,6 +32,7 @@ def inject_base_args():
 app.add_url_rule("/", view_func=views.IndexView.as_view("index"))
 app.add_url_rule("/list", view_func=views.ListView.as_view("list"))
 app.add_url_rule("/list/add", view_func=views.AddView.as_view("add_entry"))
+app.add_url_rule("/list/go/<int:entry_id>", view_func=views.OpenLinkView.as_view("openlink"))
 
 # registration & login
 app.add_url_rule("/register", view_func=views.RegistrationView.as_view("register"))

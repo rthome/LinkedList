@@ -119,6 +119,23 @@ class ListView(MethodView):
     def get(self):
         return render_template("list.html", entries=models.User.get(models.User.id == session["user"]["id"]).entries())
 
+class OpenLinkView(MethodView):
+    decorators = [login_required]
+
+    def get(self, entry_id):
+        user = models.User.get(models.User.id == session["user"]["id"])
+        try:
+            link = models.Entry.get(models.Entry.id == entry_id)
+            if link.user == user:
+                link.unread = False;
+                link.save()
+                return redirect(link.url)
+            else:
+                abort(404)
+        except models.Entry.DoesNotExist:
+            abort(404)
+        return entry_id;
+
 class AddView(MethodView):
     decorators = [login_required]
 

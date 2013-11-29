@@ -3,6 +3,9 @@ from flask import *
 
 import models, views, config
 
+JS_FILES = [("https://code.jquery.com/jquery.js", False), ("js/bootstrap.min.js", True), ("js/list.min.js", True)]
+CSS_FILES = [("css/bootstrap.min.css", True), ("css/bootstrap.min.css", True), ("css/bootstrap-theme.min.css", True), ("css/style.css", True)]
+
 app = Flask(__name__)
 app.config.from_object(config)
 
@@ -23,10 +26,19 @@ def db_after_request(response):
 
 @app.context_processor
 def inject_base_args():
-    d = {}
-    # inject base css and js arguments into all templates
-    d["base"] = dict(js=["https://code.jquery.com/jquery.js", url_for("static", filename="js/bootstrap.min.js")], css=[url_for("static", filename="css/bootstrap.min.css"), url_for("static", filename="style.css")])
-    return d
+    def process_file_list(lst):
+        results = []
+        for path, p in lst:
+            full_path = None
+            if p:
+                full_path = url_for("static", filename=path)
+            else:
+                full_path = path
+            results.append(full_path)
+        return results
+    js = process_file_list(JS_FILES)
+    css = process_file_list(CSS_FILES)
+    return dict(base=dict(js=js, css=css))
 
 # user pages
 app.add_url_rule("/", view_func=views.IndexView.as_view("index"))

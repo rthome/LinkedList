@@ -8,7 +8,7 @@
 <div class="center-block wide-container">
     <h3>Your saved links</h3>
 
-    <div class="list-group">
+    <!--<div class="list-group">
         {% for item in entries %}
         <a class="list-group-item" target="_blank" rel="nofollow" href="{{ url_for('openlink', entry_id=item.id) }}">
             <span class="text-primary">{{ item.title|default(item.url, true) }}</span>
@@ -21,6 +21,30 @@
             <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
         {% endfor %}
+    </div>-->
+
+    <div id="link-list">
+        <input class="search" placeholder="Search" />
+        <button class="sort" data-sort="title">
+            Sort by title
+        </button>
+        <ul class="list">
+            {% for item in entries %}
+            <li>
+                <a target="_blank" rel="nofollow" href="{{ url_for('openlink', entry_id=item.id) }}">
+                    <h4 class="title">{{ item.title|default(item.url, true) }}</h4>
+                    <p>
+                        {% if item.unread %}
+                        <span class="badge">unread</span>
+                        {% endif %}
+                        {% if item.url|urlloc %}
+                        <small class="text-muted">({{ item.url|urlloc }})</small>
+                        {% endif %}
+                    </p>
+                </a>
+            </li>
+            {% endfor %}
+        </ul> 
     </div>
 
     <div>
@@ -30,4 +54,15 @@
         </ul>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+<script>
+    var options = {
+        valueNames: ["title"]
+    };
+    var itemList = new List("link-list", options);
+</script>
 {% endblock %}

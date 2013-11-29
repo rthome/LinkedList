@@ -34,6 +34,9 @@ def inject_base_args():
                 full_path = url_for("static", filename=path)
             else:
                 full_path = path
+            if config.DEBUG:
+                if full_path.rfind(".min.js") > 0:
+                    full_path = full_path.replace(".min.js", ".js")
             results.append(full_path)
         return results
     js = process_file_list(JS_FILES)

@@ -128,6 +128,7 @@ class OpenLinkView(MethodView):
             link = models.Entry.get(models.Entry.id == entry_id)
             if link.user == user:
                 link.unread = False;
+                link.read_date = datetime.datetime.now()
                 link.save()
                 return redirect(link.url)
             else:

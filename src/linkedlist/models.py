@@ -26,6 +26,7 @@ class Entry(ModelBase):
     title = peewee.CharField(default="")
     unread = peewee.BooleanField(default=True)
     add_date = peewee.DateTimeField(default=datetime.datetime.now)
+    read_date = peewee.DateTimeField(null=True)
 
 def connect_db():
     _db.connect()

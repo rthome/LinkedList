@@ -29,14 +29,18 @@
         <div class="collapse navbar-collapse" id="navbar-content-collapse">
             {% block navbar_content %}
             {% if session.auth%}
-            <form class="navbar-form navbar-left" action="{{ url_for('add_entry') }}" method="post">
-                <div class="input-group">
-                    <input type="url" placeholder="Add link" name="url" class="form-control">
+            <div class="col-sm-6">
+                <form class="navbar-form navbar-left input-group" action="{{ url_for('add_entry') }}" method="post">
+                    <input type="url" placeholder="Add link" name="url" class="form-control col-sm-10">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">Add</button>
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Add
+                        </button>
                     </span>
-                </div>
-            </form>
+                </form>
+            </div>
+
             {% endif %}
             {% endblock %}
 

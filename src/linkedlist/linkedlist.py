@@ -1,4 +1,5 @@
 import os.path, urllib.parse
+from datetime import datetime
 from flask import *
 
 import models, views, config
@@ -13,6 +14,25 @@ app.config.from_object(config)
 def urlloc(s):
     o = urllib.parse.urlparse(s)
     return o.netloc
+
+@app.template_filter()
+def timesince(dt, default="just now"):
+    now = datetime.now()
+    diff = now - dt
+    periods = (
+        (diff.days // 365, "year", "years"),
+        (diff.days // 30, "month", "months"),
+        (diff.days // 7, "week", "weeks"),
+        (diff.days, "day", "days"),
+        (diff.seconds // 3600, "hour", "hours"),
+        (diff.seconds // 60, "minute", "minutes"),
+        (diff.seconds, "second", "seconds"),
+    )
+
+    for period, singular, plural in periods:
+        if period:
+            return "%d %s ago" % (period, singular if period == 1 else plural)
+    return default
 
 # open db connection on every request, close on every response
 @app.before_request

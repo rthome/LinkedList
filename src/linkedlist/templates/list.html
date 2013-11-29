@@ -9,35 +9,45 @@
     <h3>Your saved links</h3>
 
     <div id="link-list">
-        <input class="search" placeholder="Search" />
-        <button class="sort" data-sort="title">
-            Sort by title
-        </button>
-        <ul class="list">
+
+        <div class="well well-sm">
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="text" class="search form-control" placeholder="Search...">
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="sort btn btn-default" data-sort="title">Sort by title</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="list list-group">
             {% for item in entries %}
-            <li>
-                <a target="_blank" rel="nofollow" href="{{ url_for('openlink', entry_id=item.id) }}">
-                    <h4 class="title">{{ item.title|default(item.url, true) }}</h4>
-                    <p>
-                        {% if item.unread %}
-                        <span class="badge">unread</span>
-                        {% endif %}
-                        {% if item.url|urlloc %}
-                        <small class="text-muted">({{ item.url|urlloc }})</small>
-                        {% endif %}
-                    </p>
-                </a>
-            </li>
+            <a class="list-group-item" target="_blank" href="{{ url_for('openlink', entry_id=item.id) }}">
+                <h4 class="title">{{ item.title|default(item.url, true) }}</h4>
+
+                {% if item.url|urlloc %}
+                <small class="text-muted">({{ item.url|urlloc }})</small>
+                {% endif %}
+                {% if item.unread %}
+                <time class="add_date" datetime="{{ item.add_date }}">
+                    <small class="text-muted">Added {{ item.add_date|timesince }}</small>
+                </time>
+                <span class="badge">unread</span>
+                {% else %}
+                <time class="read_date" datetime="{{ item.read_date }}">
+                    <small class="text-muted">Read {{ item.read_date|timesince }}</small>
+                </time>
+                {% endif %}
+            </a>
             {% endfor %}
-        </ul> 
+        </div>
     </div>
 
-    <div>
-        <ul class="list-inline">
-            <li class="text-muted">Links: {{ entries|list|length }}</li>
-            <li class="text-muted">Unread: {{ entries|selectattr("unread")|list|length }}</li>
-        </ul>
-    </div>
+    <ul class="list-inline">
+        <li class="text-muted">Links: {{ entries|list|length }}</li>
+        <li class="text-muted">Unread: {{ entries|selectattr("unread")|list|length }}</li>
+    </ul>
 </div>
 {% endblock %}
 

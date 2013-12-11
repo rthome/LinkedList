@@ -2,7 +2,7 @@ import os.path, urllib.parse
 from datetime import datetime
 from flask import *
 
-import models, views, config
+from linkedlist import models, views, config
 
 JS_FILES = [("https://code.jquery.com/jquery.js", False), ("js/bootstrap.min.js", True), ("js/list.min.js", True)]
 CSS_FILES = [("css/bootstrap.min.css", True), ("css/bootstrap.min.css", True), ("css/bootstrap-theme.min.css", True), ("css/style.css", True)]

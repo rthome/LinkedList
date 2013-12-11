@@ -4,7 +4,7 @@ from flask import *
 from flask.views import MethodView
 from werkzeug.security import check_password_hash, generate_password_hash
 
-import models, config
+from linkedlist import models, config
 
 def auth_user(user):
     # update user

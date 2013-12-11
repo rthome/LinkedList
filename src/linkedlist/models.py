@@ -2,7 +2,7 @@ import datetime
 
 import peewee
 
-import config
+from linkedlist import config
 
 _db = peewee.SqliteDatabase(config.DATABASE)
 

@@ -4,52 +4,7 @@ from flask import *
 from flask.views import MethodView
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from linkedlist import models, config
-
-def auth_user(user):
-    # update user
-    user.last_login_date = datetime.datetime.now()
-    user.login_count += 1
-    user.save()
-    # set session variables
-    session["auth"] = True
-    session["user"] = dict(id=user.id, email=user.email, join_date=user.join_date)
-
-def unauth_user():
-    del session["user"]
-    del session["auth"]
-    if "admin" in session:
-        del session["admin"]
-
-def check_auth():
-    return session.get("auth", False)
-
-def auth_admin():
-    session["admin"] = True
-
-def check_admin():
-    return session.get("admin", False)
-
-def check_admin_credentials(password):
-    return check_password_hash(config.admin_pw_hash, password)
-
-def login_required(f):
-    @functools.wraps(f)
-    def decorator(*args, **kwargs):
-        if check_auth():
-            return f(*args, **kwargs)
-        else:
-            abort(401)
-    return decorator
-
-def admin_required(f):
-    @functools.wraps(f)
-    def decorator(*args, **kwargs):
-        if check_admin():
-            return f(*args, **kwargs)
-        else:
-            abort(401)
-    return decorator
+from linkedlist import models, auth
 
 class IndexView(MethodView):
     def get(self):
@@ -114,13 +69,13 @@ class LogoutView(MethodView):
         return redirect(url_for("index"))
 
 class ListView(MethodView):
-    decorators = [login_required]
+    decorators = [auth.login_required]
 
     def get(self):
         return render_template("list.html", entries=models.User.get(models.User.id == session["user"]["id"]).entries())
 
 class OpenLinkView(MethodView):
-    decorators = [login_required]
+    decorators = [auth.login_required]
 
     def get(self, entry_id):
         user = models.User.get(models.User.id == session["user"]["id"])
@@ -138,30 +93,9 @@ class OpenLinkView(MethodView):
         return entry_id;
 
 class AddView(MethodView):
-    decorators = [login_required]
+    decorators = [auth.login_required]
 
     def post(self):
         url = request.form["url"]
         models.Entry.create(url=url, user=models.User.get(models.User.id == session["user"]["id"]))
         return redirect(url_for("list"))
-
-class AdminLoginView(MethodView):
-    def get(self):
-        if check_admin():
-            return redirect(url_for("admin_panel"))
-        else:
-            return render_template("admin_login.html")
-
-    def post(self):
-        pw = request.form["password"]
-        result = check_admin_credentials(pw)
-        print(result)
-        if result:
-            auth_admin()
-        return redirect(url_for("admin_login"))
-
-class AdminPanelView(MethodView):
-    decorators = [login_required, admin_required]
-
-    def get(self):
-        return render_template("admin_panel.html", users=models.User.select(), entries=models.Entry.select())

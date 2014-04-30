@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>ff3edc44-4a8b-46a8-a836-b9af7d762028</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>
-    </StartupFile>
+    <StartupFile>run.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>LinkedList</Name>
     <RootNamespace>LinkedList</RootNamespace>
-    <InterpreterId>{b9f00596-f803-4eff-a379-2ffc2aeb15c8}</InterpreterId>
-    <InterpreterVersion>3.3</InterpreterVersion>
+    <InterpreterId>{863ba57e-0aad-4bf2-ac82-ebccdacf4da8}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +31,7 @@
     <Folder Include="linkedlist\static\fonts\" />
     <Folder Include="linkedlist\static\js\" />
     <Folder Include="linkedlist\templates\" />
+    <Folder Include="instance\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="linkedlist\static\css\bootstrap-theme.css" />
@@ -54,19 +55,24 @@
     <Content Include="linkedlist\templates\register.html" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="linkedlist\config.py" />
+    <Compile Include="instance\config.py" />
+    <Compile Include="config.py" />
+    <Compile Include="linkedlist\forms.py" />
     <Compile Include="linkedlist\linkedlist.py" />
     <Compile Include="linkedlist\models.py" />
     <Compile Include="linkedlist\views.py" />
     <Compile Include="linkedlist\__init__.py" />
-    <Compile Include="linkedlist\__main__.py" />
+    <Compile Include="run.py" />
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="..\..\python-venv\flask-dev\">
-      <Id>{b9f00596-f803-4eff-a379-2ffc2aeb15c8}</Id>
-      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
-      <Version>3.3</Version>
-      <Description>flask-dev (Python 64-bit 3.3)</Description>
+    <InterpreterReference Include="{2af0f10d-7135-4994-9156-5d01c9c11b7e}\2.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="..\..\..\Documents\python-venv\flask-dev\">
+      <Id>{863ba57e-0aad-4bf2-ac82-ebccdacf4da8}</Id>
+      <BaseInterpreter>{2af0f10d-7135-4994-9156-5d01c9c11b7e}</BaseInterpreter>
+      <Version>2.7</Version>
+      <Description>flask-dev (Python 2.7)</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <LibraryPath>Lib\</LibraryPath>

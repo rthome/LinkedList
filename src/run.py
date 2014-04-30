@@ -1,6 +1,8 @@
-import linkedlist
+from linkedlist import app, models
 
-run = linkedlist.run
+def run():
+    models.create_tables()
+    app.run()
 
 if __name__ == "__main__":
 	run()

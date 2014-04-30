@@ -1,41 +1,15 @@
-import datetime
+from linkedlist import db, auth
 
 import peewee
 
-from linkedlist import config
-
-_db = peewee.SqliteDatabase(config.DATABASE)
-
-class ModelBase(peewee.Model):
-    class Meta:
-        database = _db
-
-class User(ModelBase):
-    email = peewee.CharField()
-    pwhash = peewee.CharField()
-    join_date = peewee.DateTimeField(default=datetime.datetime.now)
-    last_login_date = peewee.DateTimeField(null=True)
-    login_count = peewee.IntegerField(default=0)
-
-    def entries(self):
-        return Entry.select().where(Entry.user == self)
-
-class Entry(ModelBase):
-    user = peewee.ForeignKeyField(User)
+class Entry(db.Model):
+    user = peewee.ForeignKeyField(auth.User)
     url = peewee.CharField()
     title = peewee.CharField(default="")
     unread = peewee.BooleanField(default=True)
-    add_date = peewee.DateTimeField(default=datetime.datetime.now)
+    add_date = peewee.DateTimeField(default=datetime.now)
     read_date = peewee.DateTimeField(null=True)
 
-def connect_db():
-    _db.connect()
-
-def close_db():
-    _db.close()
-
 def create_tables():
-    connect_db()
-    User.create_table()
-    Entry.create_table()
-    close_db()
+    auth.User.create_table(fail_silently=True)
+    Entry.create_table(fail_silently=True)

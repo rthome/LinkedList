@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% assets "css_all" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
+    <title>{% block page_title %}LinkedList{% endblock %}</title>
+</head>
+<body>
+    <div class="container">
+        {% include "layouts/_menu.html" %}
+        {% block flash_messages %}
+        {% include "layouts/_messages.html" %}
+        {% endblock %}
+
+        {% block body %}
+        {% endblock %}
+    </div>
+    {% assets "js_all" %}
+    <script src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+</body>
+</html>

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>893d1e8c-9fc3-4fe9-95c8-e1a7063a9b9a</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{789894c7-04a9-4a11-a6b5-3f4435165112};{1b580a1a-fdb3-4b32-83e1-6407eb2722e6};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>wsgi.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Web launcher</LaunchProvider>
+    <OutputPath>.</OutputPath>
+    <Name>LinkedList</Name>
+    <RootNamespace>LinkedList</RootNamespace>
+    <InterpreterId>{2af0f10d-7135-4994-9156-5d01c9c11b7e}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="linkedlist\api\__init__.py" />
+    <Compile Include="linkedlist\config.py" />
+    <Compile Include="instance\config.py" />
+    <Compile Include="linkedlist\core.py" />
+    <Compile Include="linkedlist\entries\forms.py" />
+    <Compile Include="linkedlist\entries\models.py" />
+    <Compile Include="linkedlist\entries\__init__.py" />
+    <Compile Include="linkedlist\factory.py" />
+    <Compile Include="linkedlist\forms.py" />
+    <Compile Include="linkedlist\frontend\assets.py" />
+    <Compile Include="linkedlist\frontend\views.py" />
+    <Compile Include="linkedlist\frontend\__init__.py" />
+    <Compile Include="linkedlist\helpers.py" />
+    <Compile Include="linkedlist\manage\users.py" />
+    <Compile Include="linkedlist\manage\__init__.py" />
+    <Compile Include="linkedlist\models.py" />
+    <Compile Include="linkedlist\services.py" />
+    <Compile Include="linkedlist\users\forms.py" />
+    <Compile Include="linkedlist\users\models.py" />
+    <Compile Include="linkedlist\users\__init__.py" />
+    <Compile Include="linkedlist\__init__.py" />
+    <Compile Include="manage.py" />
+    <Compile Include="tests\api\__init__.py" />
+    <Compile Include="tests\config.py" />
+    <Compile Include="tests\factories.py" />
+    <Compile Include="tests\frontend\__init__.py" />
+    <Compile Include="tests\helpers.py" />
+    <Compile Include="tests\pep8test.py" />
+    <Compile Include="tests\__init__.py" />
+    <Compile Include="wsgi.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebPiReference Include="https://www.microsoft.com/web/webpi/3.0/toolsproductlist.xml%3fPython27">
+      <Feed>https://www.microsoft.com/web/webpi/3.0/toolsproductlist.xml</Feed>
+      <ProductId>Python27</ProductId>
+      <FriendlyName>Python 2.7</FriendlyName>
+    </WebPiReference>
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="{2af0f10d-7135-4994-9156-5d01c9c11b7e}\2.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="instance\" />
+    <Folder Include="linkedlist\" />
+    <Folder Include="linkedlist\api\" />
+    <Folder Include="linkedlist\entries\" />
+    <Folder Include="linkedlist\frontend\" />
+    <Folder Include="linkedlist\frontend\static\" />
+    <Folder Include="linkedlist\frontend\static\css\" />
+    <Folder Include="linkedlist\frontend\static\js\" />
+    <Folder Include="linkedlist\frontend\static\fonts\" />
+    <Folder Include="linkedlist\frontend\templates\" />
+    <Folder Include="linkedlist\frontend\templates\layouts\" />
+    <Folder Include="linkedlist\frontend\templates\errors\" />
+    <Folder Include="linkedlist\manage\" />
+    <Folder Include="linkedlist\users\" />
+    <Folder Include="tests\" />
+    <Folder Include="tests\api\" />
+    <Folder Include="tests\frontend\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="linkedlist\frontend\static\css\bootstrap-theme.css" />
+    <Content Include="linkedlist\frontend\static\css\bootstrap.css" />
+    <Content Include="linkedlist\frontend\static\css\linkedlist.css" />
+    <Content Include="linkedlist\frontend\static\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="linkedlist\frontend\static\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="linkedlist\frontend\static\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="linkedlist\frontend\static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="linkedlist\frontend\static\js\bootstrap.js" />
+    <Content Include="linkedlist\frontend\static\js\jquery-1.11.1.min.js" />
+    <Content Include="linkedlist\frontend\templates\errors\404.html" />
+    <Content Include="linkedlist\frontend\templates\errors\500.html" />
+    <Content Include="linkedlist\frontend\templates\index.html" />
+    <Content Include="linkedlist\frontend\templates\layouts\base.html" />
+    <Content Include="linkedlist\frontend\templates\layouts\_menu.html" />
+    <Content Include="linkedlist\frontend\templates\layouts\_messages.html" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\Python Tools\Microsoft.PythonTools.Flask.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -41,6 +41,5 @@ def create_app(name, path, settings_override=None,
     # create database tables
     with app.app_context():
         db.create_all()
-        print app.config
 
     return app

@@ -35,9 +35,12 @@ def create_app(name, path, settings_override=None,
     app.config.from_object(settings_override) # argument override
 
     db.init_app(app)
-    db.create_all() # try to create all db tables
     security.init_app(app, SQLAlchemyUserDatastore(db, User, Role),
                       register_blueprint=register_security_blueprint)
     register_blueprints(app, name, path)
+
+    # create database tables
+    with app.app_context():
+        db.create_all()
 
     return app

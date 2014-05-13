@@ -27,7 +27,6 @@ def create_app(name, path, settings_override=None,
     """Returns a Flask application object"""
 
     environ_config_override = find_environ_config_vars()
-    print environ_config_override
 
     app = Flask(name, instance_relative_config=True)
     app.config.from_object("linkedlist.config") # public config

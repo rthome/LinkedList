@@ -208,4 +208,4 @@ docs/_build/
 # Instance config files
 # =========================
 
-LinkedList/instance/*
+instance/*

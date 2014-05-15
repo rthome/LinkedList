@@ -7,7 +7,8 @@ It is developed in Python using the Flask framework.
 
 ### Running the development server
 
-1. Install Python 2.7 and required packages (see [requirements.txt](src/requirements.txt)).
+1. Install Python 2.7 and required packages (see requirements.txt).
+	* Run `pip install -r requirements.txt` to install everything in one go.
 2. Create a config.py file in the `instance` folder, located at the project root.
 	* This file must at least contain values for the `SECRET_KEY` and `SQLALCHEMY_DATABASE_URI` config keys.
 	* To get started quickly, use `sqlite:///:memory:` for SQLALCHEMY_DATABASE_URI, which is a in-memory sqlite database.

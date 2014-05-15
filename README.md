@@ -12,8 +12,10 @@ It is developed in Python using the Flask framework.
 2. Create a config.py file in the `instance` folder, located at the project root.
 	* This file must at least contain values for the `SECRET_KEY` and `SQLALCHEMY_DATABASE_URI` config keys.
 	* To get started quickly, use `sqlite:///:memory:` for SQLALCHEMY_DATABASE_URI, which is a in-memory sqlite database.
-3. Run wsgi.py
+3. Run `python wsgi.py`
 	* This will start the development server with debugging and reloading enabled.
+
+There is also a `manage.py` script, which provides some CRUD functionality (user management, pep8 compliance testing).
 
 ### Deploying
 

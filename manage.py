@@ -29,11 +29,11 @@ class MetricsCommand(Command):
         subprocess.call(["radon", "cc", "--average", "manage.py", "wsgi.py", "linkedlist"])
 
 manager = Manager(create_app)
-manager.add_command("create_user", CreateUserCommand())
-manager.add_command("delete_user", DeleteUserCommand())
-manager.add_command("list_users", ListUsersCommand())
-manager.add_command("pep8", Pep8Command())
-manager.add_command("metrics", MetricsCommand())
+manager.add_command("create", CreateUserCommand, namespace="users")
+manager.add_command("delete", DeleteUserCommand, namespace="users")
+manager.add_command("list", ListUsersCommand, namespace="users")
+manager.add_command("pep8", Pep8Command)
+manager.add_command("metrics", MetricsCommand)
 
 if __name__ == "__main__":
     manager.run()

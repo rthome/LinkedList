@@ -30,7 +30,6 @@
   <ItemGroup>
     <Compile Include="linkedlist\api\__init__.py" />
     <Compile Include="linkedlist\config.py" />
-    <Compile Include="instance\config.py" />
     <Compile Include="linkedlist\core.py" />
     <Compile Include="linkedlist\entries\forms.py" />
     <Compile Include="linkedlist\entries\models.py" />
@@ -70,7 +69,6 @@
     <InterpreterReference Include="{2af0f10d-7135-4994-9156-5d01c9c11b7e}\2.7" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="instance\" />
     <Folder Include="linkedlist\" />
     <Folder Include="linkedlist\api\" />
     <Folder Include="linkedlist\entries\" />

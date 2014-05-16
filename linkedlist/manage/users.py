@@ -5,6 +5,7 @@ from werkzeug.datastructures import MultiDict
 
 from ..services import users
 
+
 class CreateUserCommand(Command):
     """Create a user"""
 
@@ -12,7 +13,8 @@ class CreateUserCommand(Command):
         email = prompt("Email")
         password = prompt_pass("Password")
         password_confirm = prompt_pass("Confirm password")
-        data = MultiDict(dict(email=email, password=password, password_confirm=password_confirm))
+        data = MultiDict(dict(email=email, password=password, 
+                              password_confirm=password_confirm))
         form = RegisterForm(data, csrf_enabled=False)
         if form.validate():
             user = register_user(email=email, password=password)
@@ -22,6 +24,7 @@ class CreateUserCommand(Command):
             print "Error:"
             for errors in form.errors.values():
                 print "\n".join(errors)
+
 
 class DeleteUserCommand(Command):
     """Delete a user"""
@@ -34,6 +37,7 @@ class DeleteUserCommand(Command):
         else:
             users.delete(user)
             print "User deleted"
+
 
 class ListUsersCommand(Command):
     """List all users"""

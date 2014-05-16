@@ -7,6 +7,7 @@ roles_users = db.Table(
     db.Column("user_id", db.Integer(), db.ForeignKey("users.id")),
     db.Column("role.id", db.Integer(), db.ForeignKey("roles.id")))
 
+
 class Role(db.Model, RoleMixin):
     __tablename__ = "roles"
 
@@ -21,6 +22,7 @@ class Role(db.Model, RoleMixin):
     def __ne__(self, other):
         return (self.name != other or
                 self.name != getattr(other, "name", None))
+
 
 class User(db.Model, UserMixin):
     __tablename__ = "users"

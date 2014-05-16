@@ -9,6 +9,7 @@ js_all = Bundle("js/jquery-1.11.1.min.js",
                 "js/bootstrap.js",
                 filters="jsmin", output="js/linkedlist_all.min.js")
 
+
 def init_app(app):
     assets = Environment(app)
     assets.register("css_all", css_all)

@@ -4,6 +4,7 @@ from flask_security import Security
 db = SQLAlchemy()
 security = Security()
 
+
 class Service(object):
     """A :class:`Service` instance encapsulates common SQLAlchemy model
     operations in the context of a :class:`Flask` application.
@@ -50,7 +51,7 @@ class Service(object):
     def get(self, id):
         """Returns an instance of the service's model with the specified id.
         Returns `None` if an instance with the specified id does not exist.
-        
+
         :param id: the instance id
         """
         return self.__model__.query.get(id)
@@ -58,7 +59,7 @@ class Service(object):
     def get_all(self, *ids):
         """Returns a list of instances of the service's model with the specified
         ids.
-        
+
         :param *ids: instance ids
         """
         return self.__model__.query.filter(self.__model__.id.in_(ids)).all()
@@ -66,7 +67,7 @@ class Service(object):
     def find(self, **kwargs):
         """Returns a list of instances of the service's model filtered by the
         specified key word arguments.
-        
+
         :param **kwargs: filter parameters
         """
         return self.__model__.query.filter_by(**kwargs)
@@ -74,7 +75,7 @@ class Service(object):
     def first(self, **kwargs):
         """Returns the first instance found of the service's model filtered by
         the specified key word arguments.
-        
+
         :param **kwargs: filter parameters
         """
         return self.find(**kwargs).first()
@@ -82,7 +83,7 @@ class Service(object):
     def get_or_404(self, id):
         """Returns an instance of the service's model with the specified id or
         raises an 404 error if an instance with the specified id does not exist.
-        
+
         :param id: the instance id
         """
         return self.__model__.query.get_or_404(id)

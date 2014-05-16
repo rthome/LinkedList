@@ -6,6 +6,7 @@ from flask_security import login_required
 from .. import factory
 from . import assets
 
+
 def create_app(settings_override=None):
     app = factory.create_app(__name__, __path__, settings_override)
 
@@ -17,8 +18,10 @@ def create_app(settings_override=None):
 
     return app
 
+
 def handle_error(e):
     return render_template("errors/%s.html" % e.code), e.code
+
 
 def route(bp, *args, **kwargs):
     def decorator(f):

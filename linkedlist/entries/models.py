@@ -1,5 +1,6 @@
 from ..core import db
 
+
 class Entry(db.Model):
     __tablename__ = "entries"
 

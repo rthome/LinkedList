@@ -3,6 +3,7 @@ import importlib
 
 from flask import Blueprint
 
+
 def register_blueprints(app, package_name, package_path):
     """Register all Blueprint instances on the given flask app
     found in all modules of the given package

@@ -1,5 +1,5 @@
 # Config file for public configuration
-# Secret information, such as flask's SECRET_KEY, 
+# Secret information, such as flask's SECRET_KEY,
 # must be put in ../instance/config.py and kept out of version control
 
 DEBUG = False

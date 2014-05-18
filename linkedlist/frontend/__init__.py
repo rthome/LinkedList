@@ -1,22 +1,15 @@
 from functools import wraps
 
 from flask import render_template
-from flask_security import login_required, user_registered
 
 from .. import factory
 from . import assets
-
-
-def user_registered_receiver(*args, **kwargs):
-    print "USER REGISTERED"
 
 
 def create_app(settings_override=None):
     app = factory.create_app(__name__, __path__, settings_override)
 
     assets.init_app(app)
-
-    user_registered.connect(user_registered_receiver, app)
 
     if not app.debug:
         for e in [404, 500]:
@@ -32,7 +25,6 @@ def handle_error(e):
 def route(bp, *args, **kwargs):
     def decorator(f):
         @bp.route(*args, **kwargs)
-        @login_required
         @wraps(f)
         def wrapper(*args, **kwargs):
             return f(*args, **kwargs)

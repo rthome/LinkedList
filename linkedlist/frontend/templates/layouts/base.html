@@ -11,6 +11,7 @@
 </head>
 <body>
     {% include "layouts/_menu.html" %}
+
     <div class="container">
         {% block flash_messages %}
         {% include "layouts/_messages.html" %}
@@ -19,6 +20,7 @@
         {% block body %}
         {% endblock %}
     </div>
+
     {% assets "js_all" %}
     <script src="{{ ASSET_URL }}"></script>
     {% endassets %}

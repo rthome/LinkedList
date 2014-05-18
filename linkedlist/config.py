@@ -11,7 +11,7 @@ SECURITY_PASSWORD_SALT = '8azsfoaflk'
 SECURITY_REGISTERABLE = True
 
 # very basic tracking of login stats
-SECURITY_TRACKABLE  = True
+SECURITY_TRACKABLE = True
 
 # disable flask-security email features for now
 SECURITY_SEND_REGISTER_EMAIL = False

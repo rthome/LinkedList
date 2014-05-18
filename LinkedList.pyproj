@@ -80,6 +80,8 @@
     <Folder Include="linkedlist\frontend\templates\" />
     <Folder Include="linkedlist\frontend\templates\layouts\" />
     <Folder Include="linkedlist\frontend\templates\errors\" />
+    <Folder Include="linkedlist\frontend\templates\macros\" />
+    <Folder Include="linkedlist\frontend\templates\security\" />
     <Folder Include="linkedlist\manage\" />
     <Folder Include="linkedlist\users\" />
     <Folder Include="tests\" />
@@ -102,6 +104,9 @@
     <Content Include="linkedlist\frontend\templates\layouts\base.html" />
     <Content Include="linkedlist\frontend\templates\layouts\_menu.html" />
     <Content Include="linkedlist\frontend\templates\layouts\_messages.html" />
+    <Content Include="linkedlist\frontend\templates\macros\forms.html" />
+    <Content Include="linkedlist\frontend\templates\security\login_user.html" />
+    <Content Include="linkedlist\frontend\templates\security\register_user.html" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">

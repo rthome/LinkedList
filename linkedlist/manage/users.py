@@ -13,7 +13,7 @@ class CreateUserCommand(Command):
         email = prompt("Email")
         password = prompt_pass("Password")
         password_confirm = prompt_pass("Confirm password")
-        data = MultiDict(dict(email=email, password=password, 
+        data = MultiDict(dict(email=email, password=password,
                               password_confirm=password_confirm))
         form = RegisterForm(data, csrf_enabled=False)
         if form.validate():

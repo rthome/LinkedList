@@ -9,5 +9,5 @@ from wtforms.validators import DataRequired, URL
 __all__ = ["NewEntryForm"]
 
 
-class NewEntryForm(Form, EntryFormMixin):
+class NewEntryForm(Form):
     url = URLField(validators=[DataRequired(), URL()])

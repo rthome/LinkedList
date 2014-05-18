@@ -181,6 +181,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+.webassets-cache
 
 # Installer logs
 pip-log.txt

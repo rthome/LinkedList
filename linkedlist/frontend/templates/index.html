@@ -1,10 +1,11 @@
 ﻿{% extends "layouts/base.html" %}
 
 {% block body %}
-{% from "macros/forms.html" import render_field %}
+{% from "macros/forms.html" import render_field_with_errors, render_field %}
 <div>
     <form action="{{ url_for('frontend.add_entry') }}" method="post" name="new_entry_form">
-        {{ render_field(new_entry_form.url) }}
+        {{ new_entry_form.hidden_tag() }}
+        {{ render_field_with_errors(new_entry_form.url) }}
         {{ render_field(new_entry_form.submit) }}
     </form>
 </div>

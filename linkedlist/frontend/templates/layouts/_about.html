@@ -1,1 +1,28 @@
-﻿
+﻿<div class="container container-narrow">
+    <div class="jumbotron">
+        <h1>LinkedList</h1>
+        <p>A fast, easy-to-use reading list/link saving service, optimized for simplicity.</p>
+        {% if not current_user.is_authenticated() %}
+        <p>
+            <a class="btn btn-primary btn-lg" href="{{ url_for_security('register') }}">Sign up now</a>
+            <small>or <a href="{{ url_for_security('login') }}">Log in!</a></small>
+        </p>
+        {% endif %}
+    </div>
+    {% if not current_user.is_authenticated() %}
+
+    {% endif %}
+
+    <p>
+        LinkedList is developed for a Software Engineering class at <a href="https://www.dhbw-karlsruhe.de/">
+            Baden-Wuerttemberg Cooperative State
+            University Karlsruhe
+        </a> by Jenni Lück, Sascha Stadelmann, and Raffael Thome.
+    </p>
+
+    See what people say about it:
+    <blockquote>
+        <p>It's the best thing since sliced bread!</p>
+        <footer>Raffael Thome, Author of LinkedList</footer>
+    </blockquote>
+</div>

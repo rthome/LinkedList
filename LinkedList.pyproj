@@ -109,6 +109,7 @@
     <Content Include="linkedlist\frontend\templates\macros\forms.html" />
     <Content Include="linkedlist\frontend\templates\security\login_user.html" />
     <Content Include="linkedlist\frontend\templates\security\register_user.html" />
+    <Content Include="linkedlist\frontend\templates\welcome.html" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">

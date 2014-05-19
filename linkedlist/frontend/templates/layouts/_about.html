@@ -5,7 +5,7 @@
         {% if not current_user.is_authenticated() %}
         <p>
             <a class="btn btn-primary btn-lg" href="{{ url_for_security('register') }}">Sign up now</a>
-            <small>or <a href="{{ url_for_security('login') }}">Log in!</a></small>
+            <small class="text-muted">or <a href="{{ url_for_security('login') }}">Log in!</a></small>
         </p>
         {% endif %}
     </div>

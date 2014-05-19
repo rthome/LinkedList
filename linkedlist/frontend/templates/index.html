@@ -1,5 +1,20 @@
 ﻿{% extends "layouts/base.html" %}
 
 {% block body %}
-<h1>Hello from LinkedList!</h1>
+{% from "macros/forms.html" import render_field %}
+<div>
+    <form action="{{ url_for('frontend.add_entry') }}" method="post" name="new_entry_form">
+        {{ render_field(new_entry_form.url) }}
+        {{ render_field(new_entry_form.submit) }}
+    </form>
+</div>
+<div>
+    <ul>
+        {% for entry in entries %}
+        <li>
+            {{ entry.url }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

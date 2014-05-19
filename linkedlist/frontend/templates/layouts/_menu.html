@@ -13,14 +13,14 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('frontend.about') }}">About</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <div class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated() -%}
-                <li><a href="{{ url_for('security.logout') }}">Logout</a></li>
+                <a href="{{ url_for('security.logout') }}">Logout</a>
                 {%- else -%}
-                <li><a href="{{ url_for('security.login') }}">Login</a></li>
-                <li><a href="{{ url_for('security.register') }}">Register</a></li>
+                <a type="button" class="btn btn-info navbar-btn" href="{{ url_for('security.login') }}">Login</a>
+                <a type="button" class="btn btn-info navbar-btn" href="{{ url_for('security.register') }}">Register</a>
                 {%- endif %}
-            </ul>
+            </div>
         </div>
     </div>
 </nav>

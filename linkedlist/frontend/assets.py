@@ -1,13 +1,11 @@
 from flask_assets import Environment, Bundle
 
 css_vendor = Bundle("css/bootstrap.css",
-                    "css/bootstrap-theme.css",
-                    filters="cssmin", output="css/linkedlist_vendor.min.css")
+                    "css/bootstrap-theme.css")
 
 js_vendor = Bundle("js/jquery-1.11.1.min.js",
                    "js/bootstrap.js",
-                   "js/list.js",
-                   filters="jsmin", output="js/linkedlist_vendor.min.js")
+                   "js/list.js")
 
 css_linkedlist = Bundle("css/linkedlist.css")
 

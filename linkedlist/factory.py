@@ -15,9 +15,9 @@ def find_environ_config_vars():
     # only allow secret key and database uri for now
     envvars = ["SQLALCHEMY_DATABASE_URI", "SECRET_KEY"]
     results = {}
-    for key, value in os.environ.iteritems():
-        if key in envvars:
-            results[key] = value
+    for key in envvars:
+        if key in os.environ:
+            results[key] = os.environ[key]
     return results
 
 

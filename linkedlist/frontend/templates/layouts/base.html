@@ -4,7 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% assets "css_all" %}
+    {% assets "css_vendor" %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}" />
+    {% endassets %}
+    {% assets "css_linkedlist" %}
     <link rel="stylesheet" href="{{ ASSET_URL }}" />
     {% endassets %}
     <title>{% block page_title %}LinkedList{% endblock %}</title>
@@ -21,7 +24,7 @@
         {% endblock %}
     </div>
 
-    {% assets "js_all" %}
+    {% assets "js_vendor" %}
     <script src="{{ ASSET_URL }}"></script>
     {% endassets %}
 </body>

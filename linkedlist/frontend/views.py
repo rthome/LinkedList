@@ -21,6 +21,12 @@ def index():
         return render_template("welcome.html")
 
 
+@route(bp, "/archive")
+@login_required
+def archive():
+    return render_template("archive.html")
+
+
 @route(bp, "/about")
 def about():
     return render_template("about.html")

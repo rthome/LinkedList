@@ -43,3 +43,5 @@ class User(db.Model, UserMixin):
                             backref=db.backref("users", lazy="dynamic"))
     entries = db.relationship("Entry", 
                               backref=db.backref("users"))
+    archived_entries = db.relationship("ArchivedEntry",
+                                       backref=db.backref("archivedentries"))

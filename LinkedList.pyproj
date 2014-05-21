@@ -100,6 +100,7 @@
     <Content Include="linkedlist\frontend\static\js\jquery-1.11.1.min.js" />
     <Content Include="linkedlist\frontend\static\js\list.js" />
     <Content Include="linkedlist\frontend\templates\about.html" />
+    <Content Include="linkedlist\frontend\templates\archive.html" />
     <Content Include="linkedlist\frontend\templates\errors\404.html" />
     <Content Include="linkedlist\frontend\templates\errors\500.html" />
     <Content Include="linkedlist\frontend\templates\index.html" />

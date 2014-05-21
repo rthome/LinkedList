@@ -35,6 +35,7 @@ def add_entry():
                        url=form.url.data)
     return redirect(url_for("frontend.index"))
 
+
 @route(bp, "/openlink/<int:entry_id>")
 @login_required
 def openlink(entry_id):

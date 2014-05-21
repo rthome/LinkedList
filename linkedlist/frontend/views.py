@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, flash, abort
 from flask_security import login_required, current_user
 
 from ..services import entries
@@ -39,9 +39,29 @@ def add_entry():
 @route(bp, "/openlink/<int:entry_id>")
 @login_required
 def openlink(entry_id):
-    entry = entries.get_or_404(entry_id)
-    if entry.unread:
-        entry.unread = False
-        entry.read_at = datetime.utcnow()
-        entries.save(entry)
-    return redirect(entry.url)
+    entry = entries.first(id=entry_id, user_id=current_user.id)
+    if not entry:
+        abort(404)
+    else:
+        if entry.unread:
+            entry.unread = False
+            entry.read_at = datetime.utcnow()
+            entries.save(entry)
+        return redirect(entry.url)
+
+
+@route(bp, "/clean/<operation>")
+@login_required
+def clean(operation):
+    user_entries = current_user.entries
+    if operation == "read":
+        for entry in user_entries:
+            if not entry.unread:
+                entries.delete(entry)
+    elif operation == "link":
+        pass
+    elif operation == "old":
+        pass
+    else:
+        flash("No such cleaning operation: %s" % operation, "warning")
+    return redirect(url_for("frontend.index"))

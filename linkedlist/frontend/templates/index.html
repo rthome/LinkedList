@@ -19,13 +19,18 @@
     <!-- Search -->
     <div class="well well-sm">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-5">
                 <input type="text" class="search form-control" placeholder="Search links" />
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <button type="button" class="sort btn btn-default" data-sort="title">Sort by title</button>
+                <button type="button" class="sort btn btn-default" data-sort="entry-date">Sort by date</button>
+            </div>
+            <div class="col-sm-4">
+                <a class="btn btn-warning pull-right" href="{{ url_for('frontend.clean', operation='read') }}">Delete opened links</a>
             </div>
         </div>
+
     </div>
 
     <!-- List -->
@@ -42,12 +47,12 @@
             </h4>
 
             {% if entry.unread %}
-            <time class="add-date" datetime="{{ entry.added_at }}">
+            <time class="entry-date" datetime="{{ entry.added_at }}">
                 <small class="text-muted">Added {{ entry.added_at|timesince }}</small>
             </time>
             <span class="badge">unread</span>
             {% else %}
-            <time class="read-date" datetime="{{ entry.read_at }}">
+            <time class="entry-date" datetime="{{ entry.read_at }}">
                 <small class="text-muted">Read {{ entry.read_at|timesince }}</small>
             </time>
             {% endif %}
@@ -60,7 +65,7 @@
 {% block after_scripts %}
 <script>
     var options = {
-        valueNames: ["title"]
+        valueNames: ["title", "entry-date"]
     };
     var itemList = new List("link-list", options);
 </script>

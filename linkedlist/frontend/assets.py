@@ -6,6 +6,7 @@ css_vendor = Bundle("css/bootstrap.css",
 
 js_vendor = Bundle("js/jquery-1.11.1.min.js",
                    "js/bootstrap.js",
+                   "js/list.js",
                    filters="jsmin", output="js/linkedlist_vendor.min.js")
 
 css_linkedlist = Bundle("css/linkedlist.css")

@@ -10,27 +10,33 @@
     </form>
 </div>
 <h3>Your saved links</h3>
-<small>
-    <span class="text-muted">{{ entries|list|length }} saved links, </span>
-    <span class="text-muted">{{ entries|selectattr("unread")|list|length }} unread</span>
-</small>
 <div id="link-list">
-
     <!-- Search -->
     <div class="well well-sm">
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <input type="text" class="search form-control" placeholder="Search links" />
             </div>
-            <div class="col-sm-3">
-                <button type="button" class="sort btn btn-default" data-sort="title">Sort by title</button>
-                <button type="button" class="sort btn btn-default" data-sort="entry-date">Sort by date</button>
-            </div>
-            <div class="col-sm-4">
-                <a class="btn btn-warning pull-right" href="{{ url_for('frontend.delete', operation='read') }}">Delete opened links</a>
+            <div class="col-sm-8">
+                <div class="btn-group">
+                    <button type="button" class="sort btn btn-default" data-sort="title">Sort by title</button>
+                    <button type="button" class="sort btn btn-default" data-sort="entry-date">Sort by date</button>
+                </div>
+                <div class="btn-group pull-right">
+                    <a href="{{ url_for('frontend.do_archive', type='read') }}" class="btn btn-warning">Archive</a>
+                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ url_for('frontend.do_archive', type='byage', max_age=604800) }}">Older than 1 week</a></li>
+                        <li><a href="{{ url_for('frontend.do_archive', type='byage', max_age=4 * 604800) }}">Older than 4 weeks</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{ url_for('frontend.delete', operation='read') }}">Delete opened links</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-
     </div>
 
     <!-- List -->
@@ -59,6 +65,14 @@
         </a>
         {% endfor %}
     </div>
+</div>
+<div class="pull-right">
+    <dl class="dl-horizontal">
+        <dt>Saved Links</dt>
+        <dd>{{ entries|count }}</dd>
+        <dt>Unread Links</dt>
+        <dd>{{ entries|selectattr("unread")|list|count }}</dd>
+    </dl>
 </div>
 {% endblock %}
 

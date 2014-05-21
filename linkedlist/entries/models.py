@@ -22,4 +22,5 @@ class ArchivedEntry(db.Model):
     user_id = db.Column(db.Integer(), db.ForeignKey("users.id"))
     url = db.Column(db.String(512))
     title = db.Column(db.String(512))
+    added_at = db.Column(db.DateTime())
     archived_at = db.Column(db.DateTime())

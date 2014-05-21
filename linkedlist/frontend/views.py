@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Blueprint, render_template, redirect, url_for, request, flash, abort
 from flask_security import login_required, current_user
 
-from ..services import entries
+from ..services import entries, archive
 from ..forms import NewEntryForm
 from ..models import Entry
 from . import route
@@ -21,10 +21,29 @@ def index():
         return render_template("welcome.html")
 
 
-@route(bp, "/archive")
+@route(bp, "/archive/view")
 @login_required
-def archive():
+def view_archive():
     return render_template("archive.html")
+
+
+@route(bp, "/archive/put/<type>")
+@login_required
+def do_archive(type):
+    if type == "read":
+        read_entries = [entry for entry in current_user.entries if not entry.unread]
+        for entry in read_entries:
+            archived_entry = archive.create(user_id=entry.user_id,
+                                            url=entry.url,
+                                            title=entry.title,
+                                            added_at=entry.added_at,
+                                            archived_at=datetime.utcnow())
+            entries.delete(entry)
+    elif type == "byage":
+        pass
+    else:
+        flash("No such archiving filter: %s" % type, "warning")
+    return redirect(url_for("frontend.index"))
 
 
 @route(bp, "/about")

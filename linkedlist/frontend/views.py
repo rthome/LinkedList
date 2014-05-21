@@ -32,3 +32,8 @@ def add_entry():
         entries.create(user_id=current_user.id,
                        url=form.url.data)
     return redirect(url_for("frontend.index"))
+
+@route(bp, "/openlink")
+@login_required
+def openlink():
+    pass

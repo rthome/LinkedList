@@ -9,13 +9,30 @@
         {{ render_field(new_entry_form.submit) }}
     </form>
 </div>
-<div>
-    <ul>
+<div id="link-list">
+
+    <!-- Search -->
+    <div class="well well-sm">
+        <div class="row">
+            <div class="col-sm-6">
+                <input type="text" class="search form-control" placeholder="Search links" />
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="sort btn btn-default" data-sort="title">Sort by title</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- List -->
+    <div class="list list-group">
         {% for entry in entries %}
-        <li>
-            {{ entry.url }}
-        </li>
+        <a class="list-group-item" target="_blank" href="{{ url_for('frontend.openlink', entry_id=entry.id) }}">
+            <h4 class="title">{{ entry.title|default(entry.url, true) }}</h4>
+            {% with urldomain = entry.url|urlloc %}
+            <small class="text-muted">({{ urldomain }})</small>
+            {% endwith %}
+        </a>
         {% endfor %}
-    </ul>
+    </div>
 </div>
 {% endblock %}

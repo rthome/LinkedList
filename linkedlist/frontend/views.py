@@ -24,7 +24,8 @@ def index():
 @route(bp, "/archive/view")
 @login_required
 def view_archive():
-    return render_template("archive.html")
+    archived_entries = current_user.archived_entries
+    return render_template("archive.html", entries=archived_entries)
 
 
 @route(bp, "/archive/put/<type>")

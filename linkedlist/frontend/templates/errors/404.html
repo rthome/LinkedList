@@ -1,10 +1,10 @@
 ﻿{% extends "layouts/base.html" %}
 
-{% block page_title %}LinkedList - Page not found{% endblock %}
+{% block page_title %}Page not found - LinkedList{% endblock %}
 
 {% block body %}
 <div class="well-lg">
     <h1>404 Not Found</h1>
-    This page doesn't exist.
+    This page doesn't exist. <a href="{{ url_for('frontend.index') }}">Back to start page.</a>
 </div>
 {% endblock %}

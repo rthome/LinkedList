@@ -15,7 +15,7 @@ bp = Blueprint("frontend", __name__)
 def index():
     if current_user.is_authenticated():
         form = NewEntryForm()
-        user_entries = entries.get_for_user(current_user)
+        user_entries = current_user.entries
         return render_template("index.html", entries=user_entries, new_entry_form=form)
     else:
         return render_template("welcome.html")

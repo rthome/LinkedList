@@ -41,6 +41,7 @@ def add_entry():
 def openlink(entry_id):
     entry = entries.first(id=entry_id, user_id=current_user.id)
     if not entry:
+        flash("The requested entry does not exist", "danger")
         abort(404)
     else:
         if entry.unread:
@@ -50,16 +51,21 @@ def openlink(entry_id):
         return redirect(entry.url)
 
 
-@route(bp, "/clean/<operation>")
+@route(bp, "/delete/<operation>")
 @login_required
-def clean(operation):
+def delete(operation):
     user_entries = current_user.entries
     if operation == "read":
         for entry in user_entries:
             if not entry.unread:
                 entries.delete(entry)
     elif operation == "link":
-        pass
+        id = request.args.get("id")
+        entry = entries.first(id=id, user_id=current_user.id)
+        if not entry:
+            flash("Entry with given id does not exist.", "danger")
+        else:
+            entries.delete(entry)
     elif operation == "old":
         pass
     else:

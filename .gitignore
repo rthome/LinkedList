@@ -210,3 +210,5 @@ docs/_build/
 # =========================
 
 instance/*
+
+*_vendor.min.*

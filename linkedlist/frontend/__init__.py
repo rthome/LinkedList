@@ -26,7 +26,7 @@ def timesince(instant, default="just now"):
         (diff.seconds, "second", "seconds"),
     )
 
-    for period, sinuglar, plural in periods:
+    for period, singular, plural in periods:
         if period:
             return "%d %s ago" % (period, singular if period == 1 else plural)
     return default

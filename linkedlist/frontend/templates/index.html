@@ -9,6 +9,11 @@
         {{ render_field(new_entry_form.submit) }}
     </form>
 </div>
+<h3>Your saved links</h3>
+<small>
+    <span class="text-muted">{{ entries|list|length }} saved links, </span>
+    <span class="text-muted">{{ entries|selectattr("unread")|list|length }} unread</span>
+</small>
 <div id="link-list">
 
     <!-- Search -->
@@ -27,12 +32,36 @@
     <div class="list list-group">
         {% for entry in entries %}
         <a class="list-group-item" target="_blank" href="{{ url_for('frontend.openlink', entry_id=entry.id) }}">
-            <h4 class="title">{{ entry.title|default(entry.url, true) }}</h4>
-            {% with urldomain = entry.url|urlloc %}
-            <small class="text-muted">({{ urldomain }})</small>
-            {% endwith %}
+            <h4 class="title">
+                {{ entry.title|default(entry.url, true) }}
+                {% with urldomain = entry.url|urlloc %}
+                {% if urldomain %}
+                <small class="text-muted">({{ urldomain }})</small>
+                {% endif %}
+                {% endwith %}
+            </h4>
+
+            {% if entry.unread %}
+            <time class="add-date" datetime="{{ entry.added_at }}">
+                <small class="text-muted">Added {{ entry.added_at|timesince }}</small>
+            </time>
+            <span class="badge">unread</span>
+            {% else %}
+            <time class="read-date" datetime="{{ entry.read_at }}">
+                <small class="text-muted">Read {{ entry.read_at|timesince }}</small>
+            </time>
+            {% endif %}
         </a>
         {% endfor %}
     </div>
 </div>
+{% endblock %}
+
+{% block after_scripts %}
+<script>
+    var options = {
+        valueNames: ["title"]
+    };
+    var itemList = new List("link-list", options);
+</script>
 {% endblock %}

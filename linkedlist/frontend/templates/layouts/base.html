@@ -27,5 +27,7 @@
     {% assets "js_vendor" %}
     <script src="{{ ASSET_URL }}"></script>
     {% endassets %}
+
+    {% block after_scripts %}{% endblock %}
 </body>
 </html>

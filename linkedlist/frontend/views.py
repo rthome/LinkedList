@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import Blueprint, render_template, redirect, url_for, request
 from flask_security import login_required, current_user
 
@@ -33,7 +35,12 @@ def add_entry():
                        url=form.url.data)
     return redirect(url_for("frontend.index"))
 
-@route(bp, "/openlink")
+@route(bp, "/openlink/<int:entry_id>")
 @login_required
-def openlink():
-    pass
+def openlink(entry_id):
+    entry = entries.get_or_404(entry_id)
+    if entry.unread:
+        entry.unread = False
+        entry.read_at = datetime.utcnow()
+        entries.save(entry)
+    return redirect(entry.url)

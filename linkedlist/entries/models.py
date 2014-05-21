@@ -13,3 +13,13 @@ class Entry(db.Model):
     unread = db.Column(db.Boolean(), default=True)
     added_at = db.Column(db.DateTime(), default=datetime.utcnow)
     read_at = db.Column(db.DateTime())
+
+
+class ArchivedEntry(db.Model):
+    __tablename__ = "archivedentries"
+
+    id = db.Column(db.Integer(), primary_key=True)
+    user_id = db.Column(db.Integer(), db.ForeignKey("users.id"))
+    url = db.Column(db.String(512))
+    title = db.Column(db.String(512))
+    archived_at = db.Column(db.DateTime())

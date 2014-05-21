@@ -19,7 +19,10 @@ def create_app(settings_override=None):
 
 
 def handle_error(e):
-    return render_template("errors/%s.html" % e.code), e.code
+    try:
+        return render_template("errors/%s.html" % e.code), e.code
+    except AttributeError:
+        return render_template("errors/500.html"), 500
 
 
 def route(bp, *args, **kwargs):

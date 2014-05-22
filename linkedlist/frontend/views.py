@@ -40,6 +40,15 @@ def do_archive(type):
                                             added_at=entry.added_at,
                                             archived_at=datetime.utcnow())
             entries.delete(entry)
+        moved_entries = len(read_entries)
+        if moved_entries > 0:
+            if moved_entries > 1:
+                archive_message = "%d entries have been archived."
+            else:
+                archive_message = "%d entry has been archived."
+            flash(archive_message % moved_entries, "success")
+        else:
+            flash("Nothing was archived.", "success")
     elif type == "byage":
         pass
     else:

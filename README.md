@@ -9,13 +9,15 @@ It is developed in Python using the Flask framework.
 
 1. Install Python 2.7 and required packages (see requirements.txt).
 	* Run `pip install -r requirements.txt` to install everything in one go.
+	* If `pip` has trouble installing psycopg2 on Windows, download an installer from [here](http://www.stickpeople.com/projects/python/win-psycopg/), and install that. If psycopg2 is to be installed in a Virtual Environment, you can also run `easy_install <installer_url>` from within the active virtualenv (See notes on download page).
 2. Create a config.py file in the `instance` folder, located at the project root.
 	* This file must at least contain values for the `SECRET_KEY` and `SQLALCHEMY_DATABASE_URI` config keys.
-	* To get started quickly, use `sqlite:///:memory:` for SQLALCHEMY_DATABASE_URI, which is a in-memory sqlite database.
+		* `SECRET_KEY` should be a secret random string, but can be any string value.
+		* To get started quickly, use `sqlite:///:memory:` for `SQLALCHEMY_DATABASE_URI`, which is a in-memory sqlite database.
 3. Run `python wsgi.py`
 	* This will start the development server with debugging and reloading enabled.
 
-There is also a `manage.py` script, which provides some CRUD functionality (user management, pep8 compliance testing).
+There is also a `manage.py` script, which provides some CRUD functionality (user management, pep8 compliance testing, and more).
 
 ### Deploying
 

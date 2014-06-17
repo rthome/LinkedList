@@ -25,6 +25,9 @@ class MetricsCommand(Command):
         print ""
         print "Calculating cyclomatic complexity"
         subprocess.call(["radon", "cc", "--average", "manage.py", "wsgi.py", "linkedlist"])
+        print ""
+        print "Calculating raw metrics"
+        subprocess.call(["radon", "raw", "-s", "manage.py", "wsgi.py", "linkedlist"])
 
 
 class PycleanCommand(Command):

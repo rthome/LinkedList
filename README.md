@@ -18,7 +18,3 @@ It is developed in Python using the Flask framework.
 	* This will start the development server with debugging and reloading enabled.
 
 There is also a `manage.py` script, which provides some CRUD functionality (user management, pep8 compliance testing, and more).
-
-### Deploying
-
-LinkedList is currently deployed at http://linkedlist2.herokuapp.com

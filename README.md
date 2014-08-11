@@ -22,9 +22,3 @@ There is also a `manage.py` script, which provides some CRUD functionality (user
 ### Deploying
 
 LinkedList is currently deployed at http://linkedlist2.herokuapp.com
-
-## Links
-
-Code for https://bitbucket.org/rthome/softwareengineering
-
-JIRA: http://193.196.7.46:8080/browse/LIN
